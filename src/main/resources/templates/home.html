@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- External CSS -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,
+    400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;
+    1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="#"><i class="fa-solid fa-dollar-sign fa-2xl fa-flip" style="color: #f9c815;"></i></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/home}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/transaction}">Transaction</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/accounts}">Account</a>
+                </li>
+
+                <li class="nav-item">
+                    <form action="#" th:action="@{/logout}" method="post">
+                        <input class="nav-link btn btn-link" type="submit" value="Logout">
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <h2 class="text-center mt-3">Welcome Back, <span th:text="${fullName}"></span>!</h2>
+    <!-- Add your content here -->
+    <div id="budgetDisplay"></div>
+</div>
+
+<div class="container">
+    <h2 class="text-center mt-3">Net Worth:  $<span th:text="${netWorth}"></span></h2>
+    <h4 class="text-center mt-3">Total Income:  $<span th:text="${totalIncome}"></span></h4>
+    <h4 class="text-center mt-3">Total Expense:  $<span th:text="${totalExpense}"></span></h4>
+</div>
+
+
+<div class="container mt-5">
+    <h2 class="text-center">Recent Transactions</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Amount</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="transaction : ${transactions}">
+                <td th:text="${#dates.format(transaction.createdAt, 'MM-dd-yy')}"></td>
+                <td th:text="${transaction.type}"></td>
+                <td th:text="'$'+ ${transaction.amount}"></td>
+            </tr>
+
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+<!-- Bootstrap JS (optional, for Bootstrap components) -->
+<script src="https://kit.fontawesome.com/3361e3552f.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- External JavaScript -->
+<script src="/js/scripts.js"></script>
+</body>
+</html>

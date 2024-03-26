@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Account List</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- External CSS -->
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="#"><i class="fa-solid fa-dollar-sign fa-2xl fa-flip" style="color: #f9c815;"></i></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/home}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/transaction}">Transaction</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/accounts}">Account</a>
+                </li>
+
+                <li class="nav-item">
+                    <form action="#" th:action="@{/logout}" method="post">
+                        <input class="nav-link btn btn-link" type="submit" value="Logout">
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <h1>Update Account</h1>
+    <form th:action="@{/update/{id}(id=${account.id})}"  th:method="put" th:object="${account}" id="accountForm">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" th:value="${account.name}" th:field="*{name}" >
+        </div>
+        <div class="form-group">
+            <label for="type">Type:</label>
+            <input type="text" class="form-control" id="type" th:value="${account.type}" th:field="*{type}">
+        </div>
+        <div class="form-group">
+            <label for="number">Number:</label>
+            <input type="text" class="form-control" id="number" th:value="${account.number}" th:field="*{number}">
+        </div>
+        <input type="hidden" id="user" th:name="user" th:value="${account.getUser().getId()}"/>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+</div>
+
+<script src="https://kit.fontawesome.com/3361e3552f.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="/js/scripts.js"></script>
+</body>
+</html>

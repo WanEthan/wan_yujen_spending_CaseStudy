@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Account List</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- External CSS -->
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="#"><i class="fa-solid fa-dollar-sign fa-2xl fa-flip" style="color: #f9c815;"></i></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/home}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/transaction}">Transaction</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/accounts}">Account</a>
+                </li>
+
+                <li class="nav-item">
+                    <form action="#" th:action="@{/logout}" method="post">
+                        <input class="nav-link btn btn-link" type="submit" value="Logout">
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <h2 class="text-center">Update Transaction</h2>
+    <form id="transactionForm" th:action="@{/updateTran/{id}(id=${transaction.id})}"  th:method="put" th:object="${transaction}" >
+        <div class="form-group">
+            <label>Type:</label>
+            <div class="form-check" th:each="ty : ${types}">
+                <input class="form-check-input" type="radio" th:field="*{type}" th:value="${transaction.type}" />
+                <label class="form-check-label" th:for="${ty}" th:text="${ty}"></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="amount">Amount:</label>
+            <input type="number" class="form-control" id="amount" name="amount" th:field="*{amount}"
+                   th:value="${transaction.amount}" placeholder="Enter amount" required>
+        </div>
+        <div class="form-group">
+            <label for="category">Category:</label>
+            <select class="form-control" id="category" name="category" th:field="*{category}">
+                <option th:each="category : ${categories}"
+                        th:value="${category }"
+                        th:text="${category }"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" id="description" name="description" rows="3" th:field="*{description}"
+                      th:value="${transaction.description}" placeholder="Enter description"></textarea>
+        </div>
+        <input type="hidden" id="user" th:name="user" th:value="${transaction.getUser().getId()}"/>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+<script src="https://kit.fontawesome.com/3361e3552f.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="/js/scripts.js"></script>
+</body>
+</html>

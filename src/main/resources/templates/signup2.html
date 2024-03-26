@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- External CSS -->
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="#"><i class="fa-solid fa-dollar-sign fa-2xl fa-flip" style="color: #f9c815;"></i></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <h2 class="text-center">User Registration</h2>
+    <form class="registration-form" action="#" th:action="@{/signup-process}" th:object="${userDto}"
+          id="userForm" method="post" enctype="utf8">
+        <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input id="fullName" name="fullName" class="form-control"
+                   type="text" th:field="*{fullName}" placeholder="Full Name"/>
+            <span class="text-danger" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></span>
+<!--            <input type="text" class="form-control" id="username" name="username" required>-->
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input class="form-control" id="email" name="email" type="text"
+                   th:field="*{email}" placeholder="Email"/>
+            <span class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+            <br/>
+<!--            <input type="email" class="form-control" id="email" name="email" required>-->
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input class="form-control" id="phone" name="phone"
+                   type="text" th:field ="*{phone}" placeholder="Phone Number"/>
+            <span class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
+            <br/>
+<!--            <input type="tel" class="form-control" id="phone" name="phone" required>-->
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input class="form-control" id="password" name="password"
+                   type="password" th:field="*{password}" placeholder="Password"/>
+            <span class="text-danger" th:if="${#fields.hasErrors('password')}"
+                  th:errors="*{password}"></span><br/>
+<!--            <input type="password" class="form-control" id="password" name="password" required>-->
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input class="form-control" id="confirmPassword" name="confirmPassword"
+                   type="password" th:field="*{matchingPassword}" placeholder="Confirm Password"/>
+            <span class="text-danger" th:if="${#fields.hasErrors('matchingPassword')}"
+                  th:errors="*{matchingPassword}"></span>
+            <br/>
+<!--            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>-->
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Register</button>
+    </form>
+
+    <span>Already Registered? <a th:href="@{/login}">Login</a></span>
+</div>
+
+<!-- Bootstrap JS (optional, for Bootstrap components) -->
+<script src="https://kit.fontawesome.com/3361e3552f.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
