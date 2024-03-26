@@ -24,7 +24,7 @@ This is a full-stack Spring Boot application that provides functionalities for u
 ## Setup Instructions
 1. Clone the repository:
     ```
-    git clone <repository-url>
+    gh repo clone WanEthan/wan_yujen_spending_CaseStudy
     ```
 2. Navigate to the project directory:
     ```
